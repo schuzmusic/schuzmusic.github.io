@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var id = box.getAttribute("data-id");
         var holder = document.createElement("div");
         box.appendChild(holder);
-        new YT.Player(holder, {
+        var player = new YT.Player(holder, {
           videoId: id,
           host: "https://www.youtube-nocookie.com",
           playerVars: { autoplay: 1, mute: 1, controls: 0, loop: 1, playlist: id, playsinline: 1,
@@ -50,13 +50,21 @@ document.addEventListener("DOMContentLoaded", function () {
           events: {
             onReady: function (e) { e.target.mute(); e.target.playVideo(); },
             onStateChange: function (e) {
-              if (e.data === 1) box.classList.add("on");          // playing
-              if (e.data === 0) e.target.playVideo();             // ended -> loop
+              if (e.data === 1) box.classList.add("on");                       // playing: show
+              if (e.data === 2 || e.data === -1) box.classList.remove("on");   // paused/unstarted: hide
+              if (e.data === 0) e.target.playVideo();                          // ended: loop
             }
           }
         });
+        players.push(player);
       });
     };
+    var players = [];
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "visible") {
+        players.forEach(function (pl) { if (pl.playVideo) { pl.mute(); pl.playVideo(); } });
+      }
+    });
     var tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(tag);
