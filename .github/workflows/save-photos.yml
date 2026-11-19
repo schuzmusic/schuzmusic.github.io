@@ -1,0 +1,47 @@
+# One-time helper: copies your photos off Squarespace/Wix into this repo's images/ folder.
+# Run it from the Actions tab -> "Save my photos" -> "Run workflow". Do this BEFORE cancelling Squarespace.
+name: Save my photos
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download images
+        run: |
+          mkdir -p images
+          SQ="https://images.squarespace-cdn.com/content/v1/58a359994402439f40370c7b"
+          WX="https://static.wixstatic.com/media"
+          get() { curl -fsSL --retry 3 -o "images/$1" "$2" && echo "saved $1" || echo "FAILED $1"; }
+
+          get logo-white.png          "$SQ/1534022627907-P2L6P6RFVJK82ZV1EN6B/Schuz-white-logo.png"
+          get hero.jpeg               "$SQ/b27ab3d9-5bd1-4065-b544-d4441bda0104/60B2E9B4-15A2-4FE4-97BC-A26974D61F64.jpeg"
+          get live-aston-manor.jpg    "$SQ/1695354976595-M25AXAHCMDE8Z5FQ7RJP/5D6DD038-A7A1-4371-893F-D45AA2152FE5.JPG"
+          get press-2.jpg             "$SQ/1695354976522-R0MA7KNY0KK1XTUEP9II/1D3F9439-301A-474D-8AA5-25B1115A0A15.JPG"
+          get press-1.jpeg            "$SQ/1695355032621-QRXECKOLP7GYYOPWCU46/pressphoto_1.jpeg"
+          get press-3.jpeg            "$SQ/1695355031194-6MYW3F1KG6UULHBLBZ7F/pressphoto_2.jpeg"
+          get live-seattle-4.jpg      "$SQ/1695355090209-EBKBHIT2OBBB01H35YQP/SD+Seattle-4.jpg"
+          get live-seattle-12.jpg     "$SQ/1695355090510-OCWT2Z7HHB52T39ILGDM/SD+Seattle-12.jpg"
+          get live-crowd.jpg          "$SQ/1695355032693-YBWF4H1GL1ZOPYXRMC62/74381930_1358495461020890_6384283166823153664_n.jpg"
+          get screenshot-2018.png     "$SQ/1695355031595-1YJI6R3WJAGF87ONM6UK/Screen+Shot+2018-08-10+at+5.19.59+PM.png"
+          get favicon.ico             "$SQ/1535654052306-CTQYFH13S9SMQAP2O7KR/favicon.ico"
+          get logo-black-on-white.jpg "https://static1.squarespace.com/static/58a359994402439f40370c7b/t/5b6f53fd4ae2373e2bfd190e/1534022657372/Schuz-black-logo-white-background.jpg"
+          get synergy-ep.jpg          "$WX/feb2db_79c2934787b94c8aaa7b0bf2a4fc8663~mv2.jpg"
+          get alive-flip-art.jpg      "$WX/feb2db_2213f5c057524c299b76983a96b246c0~mv2.jpg"
+          get epk-photo-1.jpg         "$WX/feb2db_843b74ad14c74a41a1388d8b9cd171cd~mv2.jpg"
+          get epk-photo-2.jpg         "$WX/feb2db_3ecab4b8e2514b018205f5c403240393~mv2.jpg"
+          get epk-photo-3.jpg         "$WX/feb2db_0c685bed2dfa4ef1b04a9ee6882e7b96~mv2.jpg"
+
+      - name: Commit images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add images
+          git diff --cached --quiet && echo "Nothing new to save" || (git commit -m "Save photos from old site" && git push)
