@@ -21,7 +21,7 @@ jobs:
           WX="https://static.wixstatic.com/media"
           get() { [ -f "images/$1" ] && return 0; curl -fsSL --retry 3 -o "images/$1" "$2" && echo "saved $1" || echo "FAILED $1"; }
 
-          get logo-white.png          "$SQ/1534022627907-P2L6P6RFVJK82ZV1EN6B/Schuz-white-logo.png"
+          get logo-white-wide.png      "$SQ/1534022627907-P2L6P6RFVJK82ZV1EN6B/Schuz-white-logo.png"
           get hero.jpeg               "$SQ/b27ab3d9-5bd1-4065-b544-d4441bda0104/60B2E9B4-15A2-4FE4-97BC-A26974D61F64.jpeg"
           get live-aston-manor.jpg    "$SQ/1695354976595-M25AXAHCMDE8Z5FQ7RJP/5D6DD038-A7A1-4371-893F-D45AA2152FE5.JPG"
           get press-2.jpg             "$SQ/1695354976522-R0MA7KNY0KK1XTUEP9II/1D3F9439-301A-474D-8AA5-25B1115A0A15.JPG"
