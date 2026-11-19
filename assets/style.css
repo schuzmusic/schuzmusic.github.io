@@ -73,7 +73,7 @@ p { margin: 0 0 1em; }
 }
 .site-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--grad); opacity: .7; }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 78px; }
-.logo img { height: 50px; width: auto; filter: drop-shadow(0 0 8px rgba(191, 71, 255, .55)); }
+.logo img { height: 40px; width: auto; filter: drop-shadow(0 0 8px rgba(191, 71, 255, .55)); }
 .nav { display: flex; gap: 24px; }
 .nav a {
   text-decoration: none; font-family: var(--mono); text-transform: uppercase; letter-spacing: .14em;
@@ -116,7 +116,7 @@ p { margin: 0 0 1em; }
 }
 .hero-inner, .video-band .wrap { position: relative; z-index: 1; }
 .hero-inner { padding: 90px 24px; }
-.hero-logo { width: min(420px, 74vw); margin: 0 auto 18px; filter: drop-shadow(0 0 22px rgba(191, 71, 255, .7)); }
+.hero-logo { width: min(400px, 74vw); margin: 0 auto 26px; filter: drop-shadow(0 0 22px rgba(191, 71, 255, .7)); }
 .hero h1 {
   font-family: var(--mono); font-size: clamp(.95rem, 2.2vw, 1.2rem); font-weight: 400;
   text-transform: uppercase; letter-spacing: .3em; color: var(--green-3); margin: 0 0 34px;
@@ -219,7 +219,7 @@ blockquote {
 
 /* Footer */
 footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--line); background: rgba(0,0,0,.6); }
-footer .logo img { height: 56px; margin: 0 auto 22px; }
+footer .logo img { height: 52px; margin: 0 auto 22px; }
 footer .socials { justify-content: center; margin-bottom: 22px; }
 footer small { font-family: var(--mono); color: var(--muted); letter-spacing: .08em; }
 
