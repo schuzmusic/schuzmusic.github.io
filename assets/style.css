@@ -29,7 +29,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 body {
   margin: 0;
   color: var(--text);
@@ -72,8 +72,8 @@ p { margin: 0 0 1em; }
   border-bottom: 1px solid var(--line);
 }
 .site-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--grad); opacity: .7; }
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 66px; }
-.logo img { height: 34px; width: auto; filter: drop-shadow(0 0 8px rgba(191, 71, 255, .55)); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 78px; }
+.logo img { height: 50px; width: auto; filter: drop-shadow(0 0 8px rgba(191, 71, 255, .55)); }
 .nav { display: flex; gap: 24px; }
 .nav a {
   text-decoration: none; font-family: var(--mono); text-transform: uppercase; letter-spacing: .14em;
@@ -136,7 +136,8 @@ section + section { border-top: 1px solid var(--line); }
 .embed iframe { display: block; width: 100%; border: 0; }
 
 /* Release grid */
-.releases { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px; }
+.releases { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+@media (max-width: 1100px) { .releases { grid-template-columns: repeat(3, 1fr); } }
 .release { text-decoration: none; display: block; }
 .release .cover { position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 1; border: 1px solid var(--line); transition: transform .25s, box-shadow .25s; }
 .release .cover img { width: 100%; height: 100%; object-fit: cover; }
@@ -218,7 +219,7 @@ blockquote {
 
 /* Footer */
 footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--line); background: rgba(0,0,0,.6); }
-footer .logo img { height: 40px; margin: 0 auto 22px; }
+footer .logo img { height: 56px; margin: 0 auto 22px; }
 footer .socials { justify-content: center; margin-bottom: 22px; }
 footer small { font-family: var(--mono); color: var(--muted); letter-spacing: .08em; }
 
@@ -231,7 +232,7 @@ footer small { font-family: var(--mono); color: var(--muted); letter-spacing: .0
 @media (max-width: 860px) {
   .menu-btn { display: block; }
   .nav {
-    display: none; position: absolute; top: 66px; left: 0; right: 0;
+    display: none; position: absolute; top: 78px; left: 0; right: 0;
     flex-direction: column; gap: 0; background: #000; border-bottom: 1px solid var(--line);
   }
   .nav.open { display: flex; }

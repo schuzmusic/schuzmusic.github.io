@@ -11,3 +11,5 @@ otter-pop.jpg https://i.scdn.co/image/ab67616d0000b273894233de4c6ac96d84cf8884
 resurgence.jpg https://i.scdn.co/image/ab67616d0000b273b7501d870a7613bd5d157ec7
 jealous.jpg https://i.scdn.co/image/ab67616d0000b2737dd6f3e77ec2a1bd432c1486
 stand-by.jpg https://i.scdn.co/image/ab67616d0000b2732fcdc0eadb720a98dde8b866
+ready-or-not.jpg https://i.scdn.co/image/ab67616d0000b273a01caef50cb5651da3b42ecc
+let-it-go.jpg https://i.scdn.co/image/ab67616d0000b273b252a81578e5d5ba035a62aa
