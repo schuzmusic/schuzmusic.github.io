@@ -32,6 +32,36 @@ document.addEventListener("DOMContentLoaded", function () {
     el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); } });
   });
 
+  // Background videos (hero + A/V set). Hidden until actually playing,
+  // so visitors never see YouTube's spinner or play button.
+  var bgs = document.querySelectorAll(".bg-video[data-id]");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (bgs.length && !reduce) {
+    window.onYouTubeIframeAPIReady = function () {
+      bgs.forEach(function (box) {
+        var id = box.getAttribute("data-id");
+        var holder = document.createElement("div");
+        box.appendChild(holder);
+        new YT.Player(holder, {
+          videoId: id,
+          host: "https://www.youtube-nocookie.com",
+          playerVars: { autoplay: 1, mute: 1, controls: 0, loop: 1, playlist: id, playsinline: 1,
+                        modestbranding: 1, rel: 0, iv_load_policy: 3, disablekb: 1, fs: 0 },
+          events: {
+            onReady: function (e) { e.target.mute(); e.target.playVideo(); },
+            onStateChange: function (e) {
+              if (e.data === 1) box.classList.add("on");          // playing
+              if (e.data === 0) e.target.playVideo();             // ended -> loop
+            }
+          }
+        });
+      });
+    };
+    var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+  }
+
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 });
