@@ -19,7 +19,7 @@ jobs:
           mkdir -p images
           SQ="https://images.squarespace-cdn.com/content/v1/58a359994402439f40370c7b"
           WX="https://static.wixstatic.com/media"
-          get() { curl -fsSL --retry 3 -o "images/$1" "$2" && echo "saved $1" || echo "FAILED $1"; }
+          get() { [ -f "images/$1" ] && return 0; curl -fsSL --retry 3 -o "images/$1" "$2" && echo "saved $1" || echo "FAILED $1"; }
 
           get logo-white.png          "$SQ/1534022627907-P2L6P6RFVJK82ZV1EN6B/Schuz-white-logo.png"
           get hero.jpeg               "$SQ/b27ab3d9-5bd1-4065-b544-d4441bda0104/60B2E9B4-15A2-4FE4-97BC-A26974D61F64.jpeg"
@@ -38,6 +38,15 @@ jobs:
           get epk-photo-1.jpg         "$WX/feb2db_843b74ad14c74a41a1388d8b9cd171cd~mv2.jpg"
           get epk-photo-2.jpg         "$WX/feb2db_3ecab4b8e2514b018205f5c403240393~mv2.jpg"
           get epk-photo-3.jpg         "$WX/feb2db_0c685bed2dfa4ef1b04a9ee6882e7b96~mv2.jpg"
+
+      - name: Download release cover art (listed in .github/covers.txt)
+        run: |
+          mkdir -p images/art
+          while read -r name url; do
+            [ -z "$name" ] && continue
+            [ -f "images/art/$name" ] && continue
+            curl -fsSL --retry 3 -o "images/art/$name" "$url" && echo "saved art/$name" || echo "FAILED art/$name"
+          done < .github/covers.txt
 
       - name: Commit images
         run: |
