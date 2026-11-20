@@ -100,7 +100,8 @@ p { margin: 0 0 1em; }
 /* Hero with background video */
 .hero { position: relative; min-height: 92vh; display: grid; place-items: center; text-align: center; overflow: hidden; background: #000; }
 .hero-bg, .bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.bg-video { overflow: hidden; pointer-events: none; }
+.hero-bg { z-index: 0; }
+.bg-video { overflow: hidden; pointer-events: none; z-index: 1; }
 .bg-video iframe {
   position: absolute; top: 50%; left: 50%; border: 0;
   width: 100vw; height: 56.25vw; min-height: 100%; min-width: 177.78vh;
@@ -111,10 +112,11 @@ p { margin: 0 0 1em; }
 .hero::after, .video-band::after {
   content: ""; position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 55%, #000 100%),
-    linear-gradient(90deg, rgba(122,45,170,.35), rgba(14,97,31,.25));
+    linear-gradient(180deg, rgba(0,0,0,.20) 0%, rgba(0,0,0,.30) 60%, #000 100%),
+    linear-gradient(90deg, rgba(122,45,170,.18), rgba(14,97,31,.12));
+  z-index: 2;
 }
-.hero-inner, .video-band .wrap { position: relative; z-index: 1; }
+.hero-inner, .video-band .wrap, .scroll-cue { position: relative; z-index: 3; }
 .hero-inner { padding: 90px 24px; }
 .hero-logo { width: min(400px, 74vw); margin: 0 auto 26px; filter: drop-shadow(0 0 22px rgba(191, 71, 255, .7)); }
 .hero h1 {
@@ -122,7 +124,7 @@ p { margin: 0 0 1em; }
   text-transform: uppercase; letter-spacing: .3em; color: var(--green-3); margin: 0 0 34px;
 }
 .hero .btn-row { justify-content: center; }
-.scroll-cue { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 1; font-family: var(--mono); font-size: .75rem; letter-spacing: .3em; color: var(--muted); text-decoration: none; }
+.scroll-cue { position: absolute !important; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 1; font-family: var(--mono); font-size: .75rem; letter-spacing: .3em; color: var(--muted); text-decoration: none; }
 
 /* Sections */
 section { padding: 100px 0; position: relative; }
