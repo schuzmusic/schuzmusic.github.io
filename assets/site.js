@@ -77,6 +77,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.head.appendChild(tag);
   }
 
+  // Respect "reduce motion": keep the hero on its still frame
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll(".hero-video").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
+  }
+
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 });
