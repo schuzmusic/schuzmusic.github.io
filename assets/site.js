@@ -50,8 +50,15 @@ document.addEventListener("DOMContentLoaded", function () {
           events: {
             onReady: function (e) { e.target.mute(); e.target.playVideo(); },
             onStateChange: function (e) {
-              if (e.data === 1) box.classList.add("on");                       // playing: show
-              if (e.data === 2 || e.data === -1) box.classList.remove("on");   // paused/unstarted: hide
+              if (e.data === 1) {                                              // playing: show after YouTube's start-up buttons fade
+                clearTimeout(box._t);
+                box._t = setTimeout(function () {
+                  if (e.target.getPlayerState && e.target.getPlayerState() === 1) box.classList.add("on");
+                }, 3500);
+              }
+              if (e.data === 2 || e.data === -1 || e.data === 3) {             // paused/unstarted/buffering: hide
+                clearTimeout(box._t); box.classList.remove("on");
+              }
               if (e.data === 0) e.target.playVideo();                          // ended: loop
             }
           }
