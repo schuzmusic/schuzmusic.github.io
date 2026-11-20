@@ -267,3 +267,8 @@ footer small { font-family: var(--mono); color: var(--muted); letter-spacing: .0
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; }
 .hero-video::-webkit-media-controls { display: none !important; }
 .hero-video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
+
+/* Video groups */
+.video-grid.three { grid-template-columns: repeat(3, 1fr); }
+.video-grid.three .yt .cap { font-size: .9rem; }
+@media (max-width: 860px) { .video-grid.three { grid-template-columns: 1fr; } }
