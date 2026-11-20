@@ -18,8 +18,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=202611192017">
-  <script src="assets/site.js?v=202611192017" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=202611192031">
+  <script src="assets/site.js?v=202611192031" defer></script>
 </head>
 <body>
 <header class="site-header">
@@ -42,9 +42,16 @@
 
   <!-- HERO: background video from the original homepage -->
   <div class="hero">
-    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="images/hero-poster.jpg" aria-hidden="true">
-      <source src="assets/video/hero-loop.mp4" type="video/mp4">
-    </video>
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="images/hero-poster.jpg" aria-hidden="true"></video>
+    <script>
+      /* Phones held upright get the vertical live clip; everything else gets the rooftop loop. Only one file is downloaded. */
+      (function (v) {
+        var phone = window.matchMedia && window.matchMedia("(max-width: 760px) and (orientation: portrait)").matches;
+        v.poster = phone ? "images/hero-mobile-poster.jpg" : "images/hero-poster.jpg";
+        v.src = phone ? "assets/video/hero-mobile.mp4" : "assets/video/hero-loop.mp4";
+        var p = v.play && v.play(); if (p && p.catch) p.catch(function () {});
+      })(document.currentScript.previousElementSibling);
+    </script>
     <div class="hero-inner">
       <img class="hero-logo" src="images/logo-white-wide.png" alt="Schuz" onerror="this.onerror=null;this.src='https://images.squarespace-cdn.com/content/v1/58a359994402439f40370c7b/1534022627907-P2L6P6RFVJK82ZV1EN6B/Schuz-white-logo.png'">
       <h1>Welcome to the Schuz music experience</h1>
