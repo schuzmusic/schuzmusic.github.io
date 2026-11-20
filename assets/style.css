@@ -283,3 +283,11 @@ footer small { font-family: var(--mono); color: var(--muted); letter-spacing: .0
 .credit { margin-top: 14px; font-family: var(--mono); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .credit strong { color: var(--green-3); font-weight: 400; }
 @media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 170px; gap: 10px; } }
+
+/* Masonry photo layout: every photo at its natural shape, nothing cropped */
+.masonry { columns: 3 260px; column-gap: 14px; }
+.masonry.four { columns: 4 220px; }
+.masonry a { display: block; break-inside: avoid; margin-bottom: 14px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #0b0410; }
+.masonry img { width: 100%; height: auto; display: block; transition: transform .45s, filter .45s; }
+.masonry a:hover img { transform: scale(1.03); filter: saturate(1.2); }
+@media (max-width: 860px) { .masonry, .masonry.four { columns: 2 140px; column-gap: 10px; } .masonry a { margin-bottom: 10px; } }
