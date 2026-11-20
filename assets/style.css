@@ -291,3 +291,31 @@ footer small { font-family: var(--mono); color: var(--muted); letter-spacing: .0
 .masonry img { width: 100%; height: auto; display: block; transition: transform .45s, filter .45s; }
 .masonry a:hover img { transform: scale(1.03); filter: saturate(1.2); }
 @media (max-width: 860px) { .masonry, .masonry.four { columns: 2 140px; column-gap: 10px; } .masonry a { margin-bottom: 10px; } }
+
+/* Justified photo rows: equal-height rows, full width, every photo at its true shape */
+.justified { --base: 250px; display: flex; flex-wrap: wrap; gap: 12px; }
+.justified::after { content: ""; flex-grow: 999999; }
+.justified a {
+  position: relative; display: block; overflow: hidden; border-radius: 10px;
+  border: 1px solid var(--line); background: #0b0410;
+  flex-grow: calc(var(--r) * 100); flex-basis: calc(var(--r) * var(--base));
+}
+.justified a i { display: block; }
+.justified a img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .45s, filter .45s; }
+.justified a:hover img { transform: scale(1.03); filter: saturate(1.2); }
+@media (max-width: 860px) { .justified { --base: 140px; gap: 8px; } }
+
+/* Logo download tiles (never cropped) */
+.logo-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 320px)); gap: 16px; }
+.logo-tiles a { display: grid; place-items: center; gap: 10px; padding: 26px 22px 16px; border-radius: 12px; border: 1px solid var(--line); text-decoration: none; }
+.logo-tiles a.dark { background: #000; }
+.logo-tiles a.light { background: #fff; }
+.logo-tiles img { max-height: 120px; width: auto; max-width: 100%; object-fit: contain; }
+.logo-tiles span { font-family: var(--mono); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.logo-tiles a.light span { color: #555; }
+
+/* EPK releases: covers across the full width, discography list below in two columns */
+.releases.epk-covers { grid-template-columns: repeat(4, 1fr); }
+.release-list.two-col { columns: 2; column-gap: 48px; }
+.release-list.two-col li { break-inside: avoid; }
+@media (max-width: 860px) { .releases.epk-covers { grid-template-columns: repeat(2, 1fr); } .release-list.two-col { columns: 1; } .logo-tiles { grid-template-columns: 1fr 1fr; } }
